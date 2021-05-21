@@ -1,0 +1,65 @@
+﻿@using FallNet.Models
+@model dynamic
+@{
+    ViewBag.Title = "index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row-cols-1">
+    <div class="col" style="margin-bottom: 20px">
+        <h2>Busqueda por F12 o CC:</h2>
+        @using (Html.BeginForm("Index", "Datos", FormMethod.Get))
+        {
+            <div class="input-group">
+                <input type="text" name="buscar" id="buscar" class="form-control" style="margin-right: 30px" />
+                <input type="submit" value="Buscar" class="form-control" />
+            </div>
+        }
+    </div>
+    <div>
+        <table class="table table-striped table-sm" style="float:inherit">
+            <thead class="thead-dark" style="text-align:center;">
+                <tr>
+                    <th scope="col" style="min-width:200px; border:solid">OC</th>
+                    <th scope="col" style="min-width:130px; border:solid">F12</th>
+                    <th scope="col" style="min-width:120px; border:solid">SKU</th>
+                    <th scope="col" style="min-width:120px; border:solid">CC</th>
+                    <th scope="col" style="min-width:200px; border:solid">Estado F12</th>
+                    <th scope="col" style="min-width:200px; border:solid">Nº Entrega</th>
+                </tr>
+            </thead>
+            <tbody style="text-align:center;">
+                @foreach (Datos datos in Model.Datos)
+                {
+                    <tr>
+                        <td class="align-middle">@datos.oc</td>
+                        <td class="align-middle">@datos.f12</td>
+                        <td class="align-middle">@datos.sku</td>
+                        <td class="align-middle">@datos.cc</td>
+                        <td class="align-middle">@datos.estado</td>
+                        <td class="align-middle">X</td>
+                    </tr>
+                }
+            </tbody>
+            <thead class="thead-dark" style="text-align:center;">
+                <tr>
+                    <th scope="col" style="min-width:200px; border:solid">F12</th>
+                    <th scope="col" style="min-width:200px; border:solid">Comentario</th>
+                </tr>
+            </thead>
+            <tbody style="text-align:center;">
+                @foreach (Cancelaciones cancel in Model.Cancelaciones)
+                {
+                    if (cancel != null)
+                    {
+                        <tr>
+                            <td class="align-middle">@cancel.f12</td>
+                            <td class="align-middle">cancelacion</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
